@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "675974981299-anqpd4p8temttql7j7cjono0anvdj5q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bugenmode.abakycharov.mediahackaton",
+            "certificate_hash": "ddbba42140a9526d3a44c7b5c1ebbab262b9134d"
+          }
+        },
+        {
           "client_id": "675974981299-j0gd0n7os9fm9ipp5dn723ntf4h2mj6i.apps.googleusercontent.com",
           "client_type": 3
         }
