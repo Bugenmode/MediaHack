@@ -2,6 +2,9 @@ package com.bugenmode.abakycharov.mediahackaton
 
 import android.app.Application
 import android.app.Service
+import com.bugenmode.abakycharov.mediahackaton.di.ApplicationComponent
+import com.bugenmode.abakycharov.mediahackaton.di.DaggerApplicationComponent
+import com.bugenmode.abakycharov.mediahackaton.di.DaggerComponentProvider
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasServiceInjector
@@ -9,17 +12,21 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class App :
-    Application(), HasServiceInjector {
+    Application(), DaggerComponentProvider, HasServiceInjector {
     @Inject
     lateinit var serviceDispatchingAndroidInjector: DispatchingAndroidInjector<Service>
 
     override fun serviceInjector(): AndroidInjector<Service> = serviceDispatchingAndroidInjector
 
-
+    override val component: ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder()
+            .application(this)
+            .build()
+    }
 
     override fun onCreate() {
         super.onCreate()
-//        component.inject(this)
+        component.inject(this)
         setupTimber()
     }
 

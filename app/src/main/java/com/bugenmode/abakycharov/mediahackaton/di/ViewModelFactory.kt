@@ -2,8 +2,8 @@ package com.bugenmode.abakycharov.mediahackaton.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.inject.Provider
 import javax.inject.Inject
+import javax.inject.Provider
 
 class ViewModelFactory<VM : ViewModel> @Inject constructor(
     private val viewModel: Provider<VM>

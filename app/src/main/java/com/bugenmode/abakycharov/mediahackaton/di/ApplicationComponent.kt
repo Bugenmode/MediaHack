@@ -2,7 +2,10 @@ package com.bugenmode.abakycharov.mediahackaton.di
 
 import android.app.Application
 import com.bugenmode.abakycharov.mediahackaton.App
+import com.bugenmode.abakycharov.mediahackaton.di.modules.CommonModule
 import com.bugenmode.abakycharov.mediahackaton.di.modules.NetworkModule
+import com.bugenmode.abakycharov.mediahackaton.ui.activities.main.MainViewModel
+import com.bugenmode.abakycharov.mediahackaton.ui.activities.maps.MapsViewModel
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -12,7 +15,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         NetworkModule::class,
-        AndroidSupportInjectionModule::class
+        AndroidSupportInjectionModule::class,
+        CommonModule::class
     ]
 )
 interface ApplicationComponent {
@@ -25,4 +29,7 @@ interface ApplicationComponent {
     }
 
     fun inject(app: App)
+
+    fun vmfMainMenu(): ViewModelFactory<MainViewModel>
+    fun vmfMaps(): ViewModelFactory<MapsViewModel>
 }

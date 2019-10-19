@@ -123,4 +123,17 @@ dependencies {
 
     //Location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //Swipe Card
+    implementation 'com.lorentzos.swipecards:library:1.0.9'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+
+    //GeoFire
+    implementation 'com.firebase:geofire-java:3.0.0'
+
+    //Database
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+
 }
