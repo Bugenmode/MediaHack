@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_marginBottom="48dp"
     android:layout_marginLeft="20dp"
+    android:layout_marginTop="36dp"
     android:layout_marginRight="20dp"
-    android:layout_marginTop="64dp">
+    android:layout_marginBottom="48dp">
 
     <FrameLayout
         android:id="@+id/background"
@@ -17,9 +17,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="6dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginBottom="6dp"
             android:background="@drawable/shape2"
             android:gravity="center_horizontal"
             android:orientation="vertical" />
@@ -27,9 +27,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="12dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/shape1"
             android:gravity="center_horizontal"
             android:orientation="vertical" />
@@ -44,42 +44,83 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <FrameLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-
-            <ImageView
-                android:id="@+id/cardImage"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
-                android:padding="4dp"
-                android:scaleType="centerCrop" />
-        </FrameLayout>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top|center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/layoutImg"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/bg_image">
+
+                <ImageView
+                    android:id="@+id/cardImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/txtSource"
+                android:text="@string/source"
+                android:layout_below="@id/layoutImg"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <FrameLayout
+                android:layout_alignTop="@id/txtSource"
+                android:background="@drawable/bg_category"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:layout_width="86dp"
+                android:layout_height="24dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    tools:text="ПОЛИТИКА"/>
+
+            </FrameLayout>
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_below="@id/txtSource"
+                android:padding="4dp"
+                android:layout_above="@id/btnRead"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="12dp"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/bookText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:padding="4dp"
-                    android:textColor="#787878"
-                    android:textSize="16sp"
-                    tools:text="" />
-            </ScrollView>
-        </LinearLayout>
+                    android:gravity="start"
+                    android:textColor="@android:color/black"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    tools:text="Айсен Николаев встретился с многодетной семьей Корякиных" />
 
+            </ScrollView>
+
+
+            <Button
+                android:id="@+id/btnRead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_button"
+                android:text="@string/read_detail" />
+        </RelativeLayout>
     </LinearLayout>
 
 

@@ -136,4 +136,7 @@ dependencies {
     //Database
     implementation 'com.google.firebase:firebase-database:19.2.0'
 
+    // Lottie - animation
+    implementation 'com.airbnb.android:lottie:2.7.0'
+
 }

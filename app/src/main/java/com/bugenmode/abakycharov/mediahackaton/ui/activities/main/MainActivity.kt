@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bugenmode.abakycharov.mediahackaton.R
@@ -16,7 +17,7 @@ import com.bugenmode.abakycharov.mediahackaton.ui.base.BaseActivity
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import kotlinx.android.synthetic.main.item_cards.view.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), CardAdapter.OnItemClickListener {
 
     lateinit var b: ActivityMainBinding
     private lateinit var cardAdapter: CardAdapter
@@ -41,55 +42,55 @@ class MainActivity : BaseActivity() {
 
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/images/1.jpg",
+                "https://picsum.photos/id/654/200/300",
                 "Alexis Sanchez, Arsenal forward. Wanna chat with me ?. \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/images/2.jpg",
+                "https://picsum.photos/id/654/200/300",
                 "Christano Ronaldo, Real Madrid star. Wanna chat with me ? \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/images/3.jpg",
+                "https://picsum.photos/id/654/200/300",
                 "Lionel Messi, Barcelona Best player. Wanna chat with me ? \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/4.jpg", "David Beckham. Wanna chat with me ? \n" +
+                "https://picsum.photos/id/654/200/300", "David Beckham. Wanna chat with me ? \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/images/5.jpg",
+                "https://picsum.photos/id/654/200/300",
                 "Sergio Arguerio. Wanna chat with me ? \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/images/6.jpg",
+                "https://picsum.photos/id/654/200/300",
                 "Sergio Ramos. Wanna chat with me ? \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
         array.add(
             CardModel(
-                "http://www.delaroystudios.com/images/7.jpg",
+                "https://picsum.photos/id/654/200/300",
                 "Robert Lewandoski. Wanna chat with me ? \n" +
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             )
         )
 
 
-        cardAdapter = CardAdapter(this, array)
+        cardAdapter = CardAdapter(this, array, this)
 
         flingContainer.adapter = cardAdapter
 
@@ -131,5 +132,9 @@ class MainActivity : BaseActivity() {
             view.findViewById<FrameLayout>(R.id.background).alpha = 0.0f
             cardAdapter.notifyDataSetChanged()
         }
+    }
+
+    override fun OnItemClick() {
+        Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_LONG).show()
     }
 }

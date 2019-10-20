@@ -11,7 +11,7 @@ import com.bugenmode.abakycharov.mediahackaton.data.local.model.CardModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_cards.view.*
 
-class CardAdapter(private val context: Context, private val data: List<CardModel>) : BaseAdapter() {
+class CardAdapter(private val context: Context, private val data: List<CardModel>, var listener : OnItemClickListener) : BaseAdapter() {
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -25,6 +25,9 @@ class CardAdapter(private val context: Context, private val data: List<CardModel
 
             Glide.with(context).load(data[position].imgPath).into(rowView.cardImage)
 
+            rowView.btnRead.setOnClickListener {
+                listener.OnItemClick()
+            }
         }
 
         return rowView
@@ -35,4 +38,8 @@ class CardAdapter(private val context: Context, private val data: List<CardModel
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getCount(): Int = data.size
+
+    interface OnItemClickListener {
+        fun OnItemClick()
+    }
 }
