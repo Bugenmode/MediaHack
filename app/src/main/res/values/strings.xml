@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MediaHackaton</string>
+    <string name="app_name">BlogPie</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="add_geofences">Add geofences</string>

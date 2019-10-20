@@ -12,6 +12,7 @@ import android.graphics.Color
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -53,11 +54,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
     LocationListener {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var fusedLocationListener: FusedLocationProviderClient
-    private var TTS: TextToSpeech? = null
-    private var ttsEnabled: Boolean = false
 
-    private var geofencingClient: GeofencingClient? = null
 
     private var googleApiClient: GoogleApiClient? = null
 
@@ -93,7 +90,6 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
         ref = FirebaseDatabase.getInstance().getReference("MyLocation")
         geoFire = GeoFire(ref)
 
-        initTextToSpeech()
         setupListeners()
 
         setupLocation()
@@ -145,8 +141,11 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
 
     private fun setupListeners() {
         b.btnOpen.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Загрузка данных, подождите немного", Toast.LENGTH_LONG).show()
+            Handler().postDelayed({
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }, 1000)
         }
     }
 
@@ -160,9 +159,9 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
             CircleOptions()
                 .center(geoYkt)
                 .radius(100.0)
-                .strokeColor(Color.BLUE)
-                .fillColor(0x220000FF)
-                .strokeWidth(5.0f)
+                .strokeColor(resources.getColor(R.color.colorPink))
+                .fillColor(resources.getColor(R.color.colorPinkTransparency))
+                .strokeWidth(0.0f)
         )
 
         mMap.setOnMarkerClickListener(this)
@@ -200,7 +199,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
 
         val builder = NotificationCompat.Builder(this, "MyNotifications")
             .setContentText(title)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
             .setContentText(content)
             .setContentIntent(resultPendingIntent)
@@ -220,61 +219,11 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
         manager.notify(999, builder.build())
     }
 
-    private fun initTextToSpeech() {
-
-        TTS = TextToSpeech(this, TextToSpeech.OnInitListener {
-            if (it == TextToSpeech.SUCCESS) {
-                if (TTS?.isLanguageAvailable(Locale(Locale.getDefault().language))
-                    == TextToSpeech.LANG_AVAILABLE
-                ) {
-                    TTS?.language = Locale(Locale.getDefault().language)
-                } else {
-                    TTS?.language = Locale.US
-                }
-                TTS?.setPitch(1.3f)
-                TTS?.setSpeechRate(0.7f)
-                ttsEnabled = true
-            } else {
-                Toast.makeText(applicationContext, "SOME ERROR", Toast.LENGTH_LONG).show()
-                ttsEnabled = false
-            }
-        })
-    }
 
     override fun onMarkerClick(p0: Marker?): Boolean {
         return false
     }
 
-    private fun speak(text: String) {
-        if (!ttsEnabled) return;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ttsGreater21(text)
-        } else {
-            ttsUnder20(text)
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private fun ttsUnder20(text: String) {
-        val map = HashMap<String, String>()
-        map[TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID] = "MessageId"
-        TTS?.speak(text, TextToSpeech.QUEUE_FLUSH, map)
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun ttsGreater21(text: String) {
-        val utteranceId = this.hashCode().toString() + ""
-        TTS?.speak(text, TextToSpeech.QUEUE_FLUSH, null, utteranceId)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (TTS != null) {
-            TTS!!.stop()
-            TTS!!.shutdown()
-            Timber.d("TTS Destroyed");
-        }
-    }
 
     private fun buildGoogleApiClient() {
         googleApiClient = GoogleApiClient.Builder(this)
@@ -330,7 +279,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback,
                         currentMarker = mMap.addMarker(
                             MarkerOptions()
                                 .position(LatLng(latitude, longitude))
-                                .title("YOU")
+                                .title("Ваше местоположение")
                         )
 
                         mMap.animateCamera(

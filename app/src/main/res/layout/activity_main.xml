@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="vm"
             type="com.bugenmode.abakycharov.mediahackaton.ui.activities.main.MainViewModel" />
@@ -11,21 +13,46 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorGrayLight"
         tools:context=".ui.activities.main.MainActivity">
 
-        <FrameLayout
+
+        <com.lorentzos.flingswipe.SwipeFlingAdapterView
+            android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorGrayLight">
+            android:layout_above="@id/imgPlay"
+            android:layout_marginBottom="16dp"
+            app:rotation_degrees="15.5" />
 
+        <ImageView
+            android:id="@+id/imgLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/imgPlay"
+            android:layout_marginBottom="36dp"
+            android:src="@drawable/ic_likebutton"/>
 
-            <com.lorentzos.flingswipe.SwipeFlingAdapterView
-                android:id="@+id/frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:rotation_degrees="15.5" />
+        <ImageView
+            android:id="@+id/imgDontShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/imgPlay"
+            android:layout_marginBottom="36dp"
+            android:src="@drawable/ic_dontshowthisagain"/>
 
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/imgPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="26dp"
+            android:src="@drawable/ic_gotoaudiobutton"/>
 
     </RelativeLayout>
 </layout>

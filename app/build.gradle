@@ -139,4 +139,8 @@ dependencies {
     // Lottie - animation
     implementation 'com.airbnb.android:lottie:2.7.0'
 
+    implementation "com.squareup.retrofit2:converter-scalars:2.1.0"
+
+    //Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 }

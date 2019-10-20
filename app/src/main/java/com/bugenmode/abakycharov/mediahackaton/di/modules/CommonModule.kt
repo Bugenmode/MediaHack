@@ -24,6 +24,7 @@ class CommonModule {
     @Singleton
     fun provideGson(): Gson {
         return GsonBuilder()
+            .setLenient()
             .registerTypeAdapter(LocalDateTime::class.java, DateSerializer())
             .registerTypeAdapter(LocalDateTime::class.java, DateDeserializer())
             .create()

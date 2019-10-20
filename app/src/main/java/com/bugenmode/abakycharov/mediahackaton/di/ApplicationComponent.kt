@@ -4,6 +4,8 @@ import android.app.Application
 import com.bugenmode.abakycharov.mediahackaton.App
 import com.bugenmode.abakycharov.mediahackaton.di.modules.CommonModule
 import com.bugenmode.abakycharov.mediahackaton.di.modules.NetworkModule
+import com.bugenmode.abakycharov.mediahackaton.di.modules.RepositoryModule
+import com.bugenmode.abakycharov.mediahackaton.ui.activities.detail.DetailViewModel
 import com.bugenmode.abakycharov.mediahackaton.ui.activities.main.MainViewModel
 import com.bugenmode.abakycharov.mediahackaton.ui.activities.maps.MapsViewModel
 import dagger.BindsInstance
@@ -16,7 +18,8 @@ import javax.inject.Singleton
     modules = [
         NetworkModule::class,
         AndroidSupportInjectionModule::class,
-        CommonModule::class
+        CommonModule::class,
+        RepositoryModule::class
     ]
 )
 interface ApplicationComponent {
@@ -32,4 +35,5 @@ interface ApplicationComponent {
 
     fun vmfMainMenu(): ViewModelFactory<MainViewModel>
     fun vmfMaps(): ViewModelFactory<MapsViewModel>
+    fun vmfDetail() : ViewModelFactory<DetailViewModel>
 }

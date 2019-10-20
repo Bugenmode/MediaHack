@@ -1,6 +1,7 @@
 package com.bugenmode.abakycharov.mediahackaton.di.modules
 
 import com.bugenmode.abakycharov.mediahackaton.BuildConfig
+import com.bugenmode.abakycharov.mediahackaton.data.remote.services.ApiService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -8,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -43,9 +45,24 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.google.com")
+            .baseUrl("http://h910229648.nichost.ru")
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideApiService(
+        okHttpClient: OkHttpClient,
+        retrofit: Retrofit
+    ): ApiService {
+        val okHttpClientModified =
+            okHttpClient.newBuilder()
+                .build()
+        val retrofitModified = retrofit.newBuilder().client(okHttpClientModified).build()
+        return retrofitModified.create(ApiService::class.java)
+    }
+
 }
